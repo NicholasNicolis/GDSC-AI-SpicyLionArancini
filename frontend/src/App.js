@@ -5,6 +5,7 @@ import DefaultContent from './component/defaultContent';
 
 
 import SideBar from "./component/sidebar";
+import ProfilingContent from "./component/profilingContent";
 
 
 function App() {
@@ -12,7 +13,8 @@ function App() {
     <div className="bg-gray-100">
 
     <SideBar/>
-    <DefaultContent/>
+    {/*<DefaultContent/>*/}
+    <ProfilingContent/>
 
     </div>
   );
