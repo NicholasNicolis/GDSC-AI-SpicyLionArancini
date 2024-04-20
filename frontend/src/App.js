@@ -1,25 +1,19 @@
-import logo from './logo.svg';
 import axios from "axios";
 
 import './App.css';
+import DefaultContent from './component/defaultContent';
+
+
+import SideBar from "./component/sidebar";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"z
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="bg-gray-100">
+
+    <SideBar/>
+    <DefaultContent/>
+
     </div>
   );
 }
