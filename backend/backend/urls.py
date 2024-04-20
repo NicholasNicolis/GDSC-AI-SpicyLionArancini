@@ -1,12 +1,8 @@
+# your_project_name/urls.py
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework import routers
-from GDSC import views
-
-router = routers.DefaultRouter()
-router.register(r'todos', views.TodoView, 'todo')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
+    path('api/', include('GDSC.urls')),  # Include your app's URLs here
 ]
