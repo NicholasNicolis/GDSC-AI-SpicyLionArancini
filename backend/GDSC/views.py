@@ -36,6 +36,7 @@ def create_basic_profile_prompt(profilation):
 
 
 basic_prompt = None
+conversation_chain = None
 
 
 class ItemCreateView(generics.CreateAPIView):
@@ -194,3 +195,40 @@ class Example(generics.CreateAPIView):
         self.perform_create(serializer)
         return Response(request.data, status=status.HTTP_201_CREATED)
 
+class Journey(generics.CreateAPIView):
+    quiteryset = Example.objects.all()
+    serializer_class = ExampleSerializer
+
+    def post(self, request, *args, **kwargs):
+        print("POST request data:", request.data)   
+
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        query = f"Propose a learning journey for me to help me learn about the topics in the document. Specify timeline information. Assume I have little or no prior knowledge about the topics in the document. Return the result in a JSON."
+        result = conversation_chain({"question": query})
+        answer = result["answer"]
+
+        data = json.loads(answer)
+
+        return JsonResponse(data, status=200)
+
+class Exercise(generics.CreateAPIView):
+    quiteryset = Example.objects.all()
+    serializer_class = ExampleSerializer
+
+    def post(self, request, *args, **kwargs):
+        print("POST request data:", request.data)   
+
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        query = f"Test my knowledge about one random area among the ones identified in the map. Propose some exercise, possibly. Return the result in a JSON."
+        result = conversation_chain({"question": query})
+        answer = result["answer"]
+
+        data = json.loads(answer)
+
+        return JsonResponse(data, status=200)
