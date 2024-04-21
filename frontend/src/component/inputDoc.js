@@ -30,22 +30,30 @@ function InputDoc() {
 
   return (
     <div className='py-4 px-6 sm:ml-64 overflow-auto bg-white'>
-      <label className="block mb-2 text-sm font-medium text-gray-900 " htmlFor="multiple_files">
-        Upload multiple files
-      </label>
-      <input
-        className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none"
-        id="multiple_files"
-        type="file"
-        multiple
-        onChange={handleFileChange}
-      />
-      <button className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleSubmit}>
-        Upload
-      </button>
+        <div className="p-6 rounded-lg shadow-lg bg-gradient-to-br from-yellow-100 to-orange-200 ">
+            <h1 className="text-3xl font-black text-gray-800">WHAT YOU WANNA STUDY</h1>
+            <p className="text-xl text-justify mb-4">
+            Now you have to upload the file you wanna start studying
+            </p>
+
+            <label className="block mb-2 text-xl font-semibold text-gray-900" htmlFor="multiple_files">
+                Upload files
+            </label>
+            <div className='flex items-center'>
+                <input
+                className="p-2 block w-4/5 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none"
+                id="multiple_files"
+                type="file"
+                multiple
+                onChange={handleFileChange}
+                />
+                <button className="ml-4 py-2 px-4 bg-gray-900 text-white rounded-lg shadow-md hover:bg-gray-700 focus:outline-none" onClick={handleSubmit}>
+                Ask Duck
+                </button>
+            </div>
+        </div>
     </div>
   );
 }
 
 export default InputDoc;
-
