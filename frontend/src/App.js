@@ -18,6 +18,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/userprofile/*" element={<Page_UserProfile/>} />
+        <Route path="/" element={<Page_UserProfile/>} />
         <Route path="/upload/*" element={<Page_Upload />} />
         <Route path="/study/*" element={<Page_Study />} />
         <Route path="/graphs/*" element={<Page_Graphs />} />
