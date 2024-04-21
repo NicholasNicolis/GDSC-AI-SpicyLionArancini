@@ -37,7 +37,6 @@ class ItemCreateView(generics.CreateAPIView):
         }'''
         basic_prompt = create_basic_profile_prompt(request.data)
 
-
         return Response(request.data, status=status.HTTP_201_CREATED)
 
     

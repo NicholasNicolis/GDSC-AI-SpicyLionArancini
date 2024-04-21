@@ -41,7 +41,7 @@ function ProfilingContent() {
     })
     .then((response) => {
       console.log(response.data);
-      //setDisplayData(response.data);
+      setDisplayData(response.data);
     })
     .catch((error) => {
       console.error('Error sending POST request:', error);
