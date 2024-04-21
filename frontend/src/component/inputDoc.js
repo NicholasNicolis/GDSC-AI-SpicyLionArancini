@@ -241,9 +241,26 @@ const tmp2 = {
   }
 };
 
+
 function Graph(data) {
+  const prova = data;
+
+  return (
+    <div className="Graph py-4 mt-4 overflow-auto ">
+        <div className="p-6 rounded-lg shadow-lg bg-white ">
+            <h1 className="text-3xl font-black text-gray-800">MIND MAP</h1>
+            <p className="text-xl text-justify mb-4">
+            Below you will find a graphical representation of the main elements of your search, which have been connected by importance and significance.
+            </p>
+            <Accordion data={prova} />
+        </div>
+    </div>
+  );
+}
+
+function GraphLineare(data) {
   {/* json */}
-  const prova = tmp;
+  const prova = data;
 
   return (
     <div className="Graph py-4 mt-4 overflow-auto ">

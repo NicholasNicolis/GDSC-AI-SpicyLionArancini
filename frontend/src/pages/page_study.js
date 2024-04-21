@@ -1,7 +1,7 @@
 
 import React from 'react';
 // Importa il PDF che desideri visualizzare
-import YourPDF from '../pdfs/kids.pdf';
+import YourPDF from '../pdfs/aos.pdf';
 import SideBar from "../component/sidebar";
 
 
