@@ -10,6 +10,7 @@ import Page_Study from "./pages/page_study";
 import Page_Graphs from "./pages/page_graphs";
 import Page_UserProfile from "./pages/page_userProfile"
 import LearningJourney from "./pages/page_learningJourney"
+import Exercise from "./pages/page_exercise"
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/upload/*" element={<Page_Upload />} />
         <Route path="/study/*" element={<Page_Study />} />
         <Route path="/learningjourney/*" element={<LearningJourney />} />
+        <Route path="/exercise/*" element={<Exercise />} />
         {/**
         <Route path="/graphs/*" element={<Page_Graphs />} />
          */}

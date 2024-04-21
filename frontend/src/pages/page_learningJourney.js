@@ -1,18 +1,7 @@
-import SideBar from "../component/sidebar"
+import SideBar from "../component/sidebar";
 
-function LearningJourney(){
-
-    return(
-        <div>
-            <SideBar/>
-            <GraphLineare/>
-        </div>
-
-    );
-
-}
-
-const data = {
+function LearningJourney() {
+  const tmp = {
     "learning_journey": {
       "duration": "2 academic years",
       "semesters": [
@@ -116,65 +105,30 @@ const data = {
     }
   };
 
-  const DisplayJSON = ({ data }) => {
-    const renderNode = (node, key) => {
-      if (typeof node === 'string') {
-        return <li key={key}>{node}</li>;
-      } else if (Array.isArray(node)) {
-        return (
-          <ul key={key}>
-            {node.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
-        );
-      } else if (typeof node === 'object') {
-        return (
-          <ul key={key}>
-            {Object.entries(node).map(([subKey, subNode]) => (
-              <li key={subKey}>
-                <strong>{subKey}: </strong>
-                {renderNode(subNode)}
-              </li>
-            ))}
-          </ul>
-        );
-      }
-    };
-  
+  const renderLearningJourney = () => {
     return (
-      <div>
-        {Object.entries(data).map(([category, categoryData]) => (
-          <div key={category}>
-            <h2>{category}</h2>
-            {Object.entries(categoryData).map(([section, sectionData]) => (
-              <div key={section}>
-                <h3>{section}</h3>
-                {renderNode(sectionData)}
-              </div>
-            ))}
+      <div className="mb-6 py-4 px-6 bg-white sm:ml-64 overflow-auto">
+            <h1 className="text-3xl font-black text-gray-800">LEARNING JOURNEY</h1>
+            <p className="text-xl text-justify mb-4">
+            ...
+            </p>
+
+        {Object.keys(tmp.learning_journey).map((key) => (
+          <div key={key}>
+            <h3>{key}</h3>
+            <pre>{JSON.stringify(tmp.learning_journey[key], null, 2)}</pre>
           </div>
         ))}
       </div>
     );
   };
 
+  return (
+    <div>
+      <SideBar />
+      {renderLearningJourney()}
+    </div>
+  );
+}
 
-  function GraphLineare(data) {
-    {/* json */}
-    const prova = data;
-  
-    return (
-      <div className="Graph py-4 mt-4 overflow-auto ">
-          <div className="p-6 rounded-lg shadow-lg bg-white ">
-              <h1 className="text-3xl font-black text-gray-800">MIND MAP</h1>
-              <p className="text-xl text-justify mb-4">
-              Below you will find a graphical representation of the main elements of your search, which have been connected by importance and significance.
-              </p>
-              <DisplayJSON data={prova} />
-          </div>
-      </div>
-    );
-  }
-
-export default  LearningJourney;
+export default LearningJourney;
