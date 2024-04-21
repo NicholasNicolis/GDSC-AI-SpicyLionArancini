@@ -11,3 +11,11 @@ class Item(models.Model):
 
     def _str_(self):
         return self.age
+    
+
+class Example(models.Model):
+    
+    field = models.TextField(default="")
+
+    def _str_(self):
+        return self.field
