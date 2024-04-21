@@ -15,7 +15,7 @@ function InputDoc() {
         formData.append('files', selectedFiles[i]);
       }
       try {
-        const response = await axios.post('URL_DEL_SERVER', formData, {
+        const response = await axios.post('/api/items/', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
