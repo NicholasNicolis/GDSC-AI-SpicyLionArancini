@@ -3,7 +3,13 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from .models import Item
 from .serializers import ItemSerializer
+import base64
+import tzdata
+#from django.forms import UploadFileForm
+from django.http import JsonResponse
 
+
+import os 
 
 def create_basic_profile_prompt(profilation):
     prompt = f"""Hi! I'm {profilation['age']} years old and I'm attending {profilation["schoolOrJob"]}.
@@ -21,23 +27,38 @@ class ItemCreateView(generics.CreateAPIView):
     serializer_class = ItemSerializer
 
 
-    def post(self, request, *args, **kwargs):
+    '''def post(self, request, *args, **kwargs):
         print("POST request data:", request.data)  # Print POST data
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         # Custom response data
-        '''response_data = {
+        response_data = {
             'data': {'age': 4,
                     'schoolOrJob': "ciaoneeeee",
                     'studyDescription': "ma va",
                     'studyGoal': "paraschelitte",
                     'methodPreference': "vaffanciu"
             }
-        }'''
+        }
         basic_prompt = create_basic_profile_prompt(request.data)
 
-        return Response(request.data, status=status.HTTP_201_CREATED)
+        return Response(request.data, status=status.HTTP_201_CREATED)'''
 
-    
-    
+    def post(self, request, *args, **kwargs):
+        if request.method == 'POST':
+            f = request.FILES['files'].file
+
+            # Define a path to save the file
+            file_path = os.path.join('./', 'uploaded_file.pdf')
+
+            # Save the file to the defined path
+            with open(file_path, 'wb') as file:
+                file.write(f.read())
+
+            # Process the file as needed (e.g., save to database, further processing)
+            # Your code here
+
+            return JsonResponse({'message': 'File uploaded successfully'}, status=200)
+        else:
+            return JsonResponse({'error': 'Invalid request method'}, status=405)
