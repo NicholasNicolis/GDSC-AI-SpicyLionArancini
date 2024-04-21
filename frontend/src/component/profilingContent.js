@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 function ProfilingContent() {
   const [formData, setFormData] = useState({
@@ -9,6 +10,8 @@ function ProfilingContent() {
     studyGoal: ''
   });
   const [displayData, setDisplayData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,7 +23,33 @@ function ProfilingContent() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setDisplayData(formData);
+    setLoading(true);
+
+    const url = 'http://localhost:8000/api/items/';
+    const postData = {
+      age: formData.age,
+      schoolOrJob: formData.schoolOrJob,
+      studyDescription: formData.studyDescription,
+      methodPreference: formData.methodPreference,
+      studyGoal: formData.studyGoal
+    };
+
+    axios.post(url, postData, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then((response) => {
+      console.log(response.data);
+      //setDisplayData(response.data);
+    })
+    .catch((error) => {
+      console.error('Error sending POST request:', error);
+      setError(error);
+    })
+    .finally(() => {
+      setLoading(false);
+    });
   };
 
   return (
