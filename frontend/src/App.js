@@ -6,6 +6,7 @@ import DefaultContent from './component/defaultContent';
 
 import SideBar from "./component/sidebar";
 import ProfilingContent from "./component/profilingContent";
+import InputDoc from "./component/inputDoc";
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
     <SideBar/>
     {/*<DefaultContent/>*/}
     <ProfilingContent/>
+    <InputDoc/>
 
     </div>
   );
