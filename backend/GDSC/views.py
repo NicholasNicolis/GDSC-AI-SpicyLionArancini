@@ -74,7 +74,8 @@ class ItemCreateView(generics.CreateAPIView):
             
             # Prompt the user for their OpenAI API key
             #api_key = input("Please enter your OpenAI API key: ")
-            api_key = "sk-proj-qZqgH1xD0nsvPHbATg4XT3BlbkFJHUH3p4syFuox0BlDYnWQ"
+            with open('api_key.txt', 'r') as file:
+                api_key = file.read()
 
             # Set the API key as an environment variable
             os.environ["OPENAI_API_KEY"] = api_key
