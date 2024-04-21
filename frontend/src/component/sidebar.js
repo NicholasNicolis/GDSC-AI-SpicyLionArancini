@@ -77,7 +77,7 @@ function SideBar() {
                     {/* Rest of your list items */}
                 </ul>
 
-                <div className="mt-40"> {/* Adding margin to create space */}
+                <div className="mt-24"> {/* Adding margin to create space */}
                     <img src={duck_img} className="h-48 me-3" alt="duck" />
                 </div>
             </div>
