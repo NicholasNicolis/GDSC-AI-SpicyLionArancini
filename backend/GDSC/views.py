@@ -1,8 +1,8 @@
 # your_app_name/views.py
 from rest_framework import generics, status
 from rest_framework.response import Response
-from .models import Item
-from .serializers import ItemSerializer
+from .models import Item, Example
+from .serializers import ItemSerializer, ExampleSerializer
 import base64
 import tzdata
 #from django.forms import UploadFileForm
@@ -30,10 +30,12 @@ def create_basic_profile_prompt(profilation):
         I would like to study, 
         and in particular: {profilation['studyDescription']}.
         I commonly tend to study in a specific way, following this methodology: {profilation["methodPreference"]}.
-        My goal are: {profilation["studyGoal"]}.
+        My goals are: {profilation["studyGoal"]}.
         These are my information on how i study and how i approach gaining new knowledge."""
     return prompt
 
+
+basic_prompt = None
 
 
 class ItemCreateView(generics.CreateAPIView):
@@ -74,7 +76,7 @@ class ItemCreateView(generics.CreateAPIView):
             
             # Prompt the user for their OpenAI API key
             #api_key = input("Please enter your OpenAI API key: ")
-            with open('api_key.txt', 'r') as file:
+            with open('./backend/GDSC/api_key.txt', 'r') as file:
                 api_key = file.read()
 
             # Set the API key as an environment variable
@@ -117,7 +119,12 @@ class ItemCreateView(generics.CreateAPIView):
             pdf_file_path = 'uploaded_file.pdf'
             vectorstore = pdf_to_vectorstore(pdf_file_path)
             conversation_chain = gen_chain(vectorstore)
-
+            # send the prompt to tell the model who the user is 
+            with open("prompt.txt", "r") as f:
+                basic_prompt = f.read()
+            res1 = conversation_chain({"question": basic_prompt})
+            print(res1['answer'])
+        
             query = "Summarize the file into a mindmap, generating it in JSON format. Clearly separate different topics."
             result = conversation_chain({"question": query})
             answer = result["answer"]
@@ -146,3 +153,44 @@ class ItemCreateView(generics.CreateAPIView):
             return JsonResponse(data, status=200)
         else:
             return JsonResponse({'error': 'Invalid request method'}, status=405)
+        
+class ItemCreateViewForm(generics.CreateAPIView):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+
+    def post(self, request, *args, **kwargs):
+        print("POST request data:", request.data)  # Print POST data
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        # Custom response data  
+        # response_data = {
+        #     'data': {'age': request.data["age"],
+        #             'schoolOrJob': request.data["schoolOrJob"],
+        #             'studyDescription': request.data["studyDescription"],
+        #             'studyGoal': request.data["studyGoal"],
+        #             'methodPreference': request.data["methodPreference"]
+        #     }
+        # }
+        basic_prompt = create_basic_profile_prompt(request.data)
+        with open("prompt.txt", "w") as f:
+            f.write(basic_prompt)
+        # invoke GPT with prompt 
+        # result = conversation_chain({"question": basic_prompt})
+        # answer = result["answer"]
+        # print(answer)
+        return Response(request.data, status=status.HTTP_201_CREATED)
+    
+
+class Example(generics.CreateAPIView):
+    queryset = Example.objects.all()
+    serializer_class = ExampleSerializer
+
+    def post(self, request, *args, **kwargs):
+        print("POST request data:", request.data)   
+
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        return Response(request.data, status=status.HTTP_201_CREATED)
+

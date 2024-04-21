@@ -25,7 +25,7 @@ function ProfilingContent() {
     e.preventDefault();
     setLoading(true);
 
-    const url = 'http://localhost:8000/api/items/';
+    const url = 'http://localhost:8000/api/items/form/';
     const postData = {
       age: formData.age,
       schoolOrJob: formData.schoolOrJob,
