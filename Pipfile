@@ -9,6 +9,8 @@ djangorestframework = "*"
 django-cors-headers = "*"
 tzdata = "*"
 langchain = "*"
+pypdf2 = "*"
+openai = "*"
 
 [dev-packages]
 
