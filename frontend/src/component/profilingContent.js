@@ -54,9 +54,9 @@ function ProfilingContent() {
 
   return (
     <div className="py-4 px-6 sm:ml-64 overflow-auto bg-white">
-      <div className="p-6 rounded-lg shadow-lg bg-gradient-to-br from-yellow-100 to-orange-200 dark:bg-gray-800">
+      <div className="p-6 rounded-lg shadow-lg bg-gradient-to-br from-yellow-100 to-orange-200 ">
         <div className="text-left mb-4">
-          <h1 className="text-3xl font-black text-gray-800 dark:text-gray-200">EXPLAIN YOURSELF</h1>
+          <h1 className="text-3xl font-black text-gray-800 ">EXPLAIN YOURSELF</h1>
           <p className='text-xl text-justify'>Please take a moment to describe your studying experience by filling out this form. Your insights will help us enhance our guidance and tailor the learning method to better suit your profile.</p>
         </div>
 
@@ -66,14 +66,14 @@ function ProfilingContent() {
           <div className="grid grid-cols-2 gap-4 mb-4">
             {/* Age */}
             <div>
-              <label htmlFor="age" className="block font-semibold text-gray-800 dark:text-gray-200 mb-2">
+              <label htmlFor="age" className="block font-semibold text-gray-800  mb-2">
                 Age:
               </label>
               <input
                 type="number"
                 id="age"
                 name="age"
-                className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 dark:border-gray-700 dark:bg-gray-800"
+                className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 "
                 value={formData.age}
                 onChange={handleChange}
                 min="0"
@@ -84,13 +84,13 @@ function ProfilingContent() {
 
             {/* School/Job */}
             <div>
-              <label htmlFor="schoolOrJob" className="block font-semibold text-gray-800 dark:text-gray-200 mb-2">
+              <label htmlFor="schoolOrJob" className="block font-semibold text-gray-800  mb-2">
                 School/Job:
               </label>
               <select
                 id="schoolOrJob"
                 name="schoolOrJob"
-                className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 dark:border-gray-700 dark:bg-gray-800"
+                className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 "
                 value={formData.schoolOrJob}
                 onChange={handleChange}
                 required
@@ -112,13 +112,13 @@ function ProfilingContent() {
               { name: 'studyGoal', label: 'What is your study goal?' }
             ].map(({ name, label }) => (
               <div key={name} className="mb-4">
-                <label htmlFor={name} className="block font-semibold text-gray-800 dark:text-gray-200 mb-2">
+                <label htmlFor={name} className="block font-semibold text-gray-800  mb-2">
                   {label}
                 </label>
                 <textarea
                   id={name}
                   name={name}
-                  className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 dark:border-gray-700 dark:bg-gray-800"
+                  className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 "
                   rows="3"
                   value={formData[name]}
                   onChange={handleChange}
@@ -140,8 +140,8 @@ function ProfilingContent() {
         {/* Display Data */}
         {displayData && (
           <div className="mt-8 p-6 rounded-lg bg-white">
-            <p className="font-bold mb-2 text-gray-800 dark:text-gray-200">Submitted Data:</p>
-            <ul className="text-gray-800 dark:text-gray-200">
+            <p className="font-bold mb-2 text-gray-800">Submitted Data:</p>
+            <ul className="text-gray-800">
               {Object.entries(displayData).map(([key, value]) => (
                 <li key={key} className="mb-2">
                   <strong>{key}:</strong> {value}

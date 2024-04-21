@@ -15,7 +15,7 @@ function InputDoc() {
         formData.append('files', selectedFiles[i]);
       }
       try {
-        const response = await axios.post('URL_DEL_SERVER', formData, {
+        const response = await axios.post('/api/items/', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -30,11 +30,11 @@ function InputDoc() {
 
   return (
     <div className='py-4 px-6 sm:ml-64 overflow-auto bg-white'>
-      <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="multiple_files">
+      <label className="block mb-2 text-sm font-medium text-gray-900 " htmlFor="multiple_files">
         Upload multiple files
       </label>
       <input
-        className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+        className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none"
         id="multiple_files"
         type="file"
         multiple
